@@ -1,0 +1,50 @@
+<p>Thành phố trực thuộc trung ương</p>
+
+<div>
+  <p>ngModel</p>
+  <province-select
+    [(ngModel)]="provinceModel"
+    name="provinceModel"
+    [type]="'central'"
+    #provinceEl="ngModel"
+  ></province-select>
+  <span>{{ provinceEl.touched ? 'touched' : 'none touch' }}</span>
+  <p style="color:red" *ngIf="provinceEl.invalid && provinceEl.errors.type">
+    Type is not correct
+  </p>
+</div>
+<hr />
+<div>
+  <p>formControlName</p>
+  <form [formGroup]="formGroup">
+    <province-select
+      formControlName="province"
+      [type]="'central'"
+    ></province-select>
+    <span>{{ getControl('province').touched ? 'touched' : 'none touch' }}</span>
+    <p
+      style="color:red"
+      *ngIf="
+        getControl('province').invalid && getControl('province').errors.type
+      "
+    >
+      Type is not correct
+    </p>
+  </form>
+</div>
+<hr />
+<div>
+  <p>formControl</p>
+  <province-select
+    [formControl]="provinceControl"
+    [type]="'central'"
+  ></province-select>
+  <span>{{ provinceControl.touched ? 'touched' : 'none touch' }}</span>
+  <p
+    style="color:red"
+    *ngIf="provinceControl.invalid && provinceControl.errors.type"
+  >
+    Type is not correct
+  </p>
+</div>
+<p>formGroup: {{ formGroup.value | json }}</p>
